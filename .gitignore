@@ -1,0 +1,11 @@
+.gradle/
+build/
+.idea/
+.intellijPlatform/
+*.iml
+out/
+*.log
+.DS_Store
+media/src/.render/
+__pycache__/
+*.pyc

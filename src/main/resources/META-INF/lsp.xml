@@ -1,0 +1,22 @@
+<idea-plugin>
+    <!-- Optional Java code-intelligence layer. Loaded only when the LSP4IJ plugin is present
+         (declared via <depends optional config-file="lsp.xml"> in plugin.xml). Registers an
+         Eclipse JDT LS-backed language server with LSP4IJ and maps it to our JavaPortable file
+         type, so it activates only where our file type owns .java — never in IDEA. -->
+    <extensions defaultExtensionNs="com.redhat.devtools.lsp4ij">
+        <server
+            id="javaPortable"
+            name="Java (Portable)"
+            factoryClass="io.genai.java.lsp.JavaLanguageServerFactory">
+            <description><![CDATA[
+                Java completion, navigation and diagnostics via Eclipse JDT LS, running on the
+                portable JDK. Fully local and offline.
+            ]]></description>
+        </server>
+        <!-- languageId MUST be "java": jdtls ignores files whose LSP languageId isn't "java".
+             Our IntelliJ language id is "JavaPortable" (unique, so it can never collide with the
+             platform's own "JAVA"), so without this override LSP4IJ would send
+             languageId="javaportable" and jdtls would reject every file. -->
+        <languageMapping language="JavaPortable" serverId="javaPortable" languageId="java"/>
+    </extensions>
+</idea-plugin>
